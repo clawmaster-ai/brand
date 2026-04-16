@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "brands": {
+    "openmaster": {
+      "role": "Universe / Platform",
+      "mark": "V4 Hex Warrior",
+      "colors": {
+        "primary": "#00BCD4",
+        "secondary": "#4DD0E1",
+        "background": "#02080E"
+      },
+      "typography": {
+        "wordmark": "Inter Light",
+        "weight": 300,
+        "tracking_horizontal": "0.06em",
+        "tracking_stacked": "0.14em"
+      },
+      "taglines": {
+        "en": "One Platform. Every Master.",
+        "zh": "一生态，众大师",
+        "jp": "共に、極みへ"
+      },
+      "animation": {
+        "type": "command-scan",
+        "description": "Nodes activate with irregular periods (3.5–4.8s) and delays — never repeats same pattern. Hex outline rotates once per 24s.",
+        "center_cycle": "3s"
+      }
+    },
+    "clawmaster": {
+      "role": "Flagship Product",
+      "mark": "V3 Command Signal",
+      "colors": {
+        "primary": "#F5A623",
+        "secondary": "#FFD54F",
+        "background": "#0C0804"
+      },
+      "typography": {
+        "wordmark": "Futura Light",
+        "weight": 300,
+        "tracking_horizontal": "0.08em",
+        "tracking_stacked": "0.18em"
+      },
+      "taglines": {
+        "en": "Master the Claw, Command the Core.",
+        "zh": "执掌利爪，驯服混乱",
+        "jp": "爪に道あり、要を制せ"
+      },
+      "animation": {
+        "type": "broadcast",
+        "description": "Three arcs pulse outward from focal dot — inner to outer — with staggered delays. 2.8s cycle.",
+        "cycle": "2.8s",
+        "delays": ["0s", "0.32s", "0.64s", "0.82s"]
+      }
+    }
+  },
+  "wordmarks": {
+    "layouts": ["horizontal", "stacked", "compact"],
+    "themes": {
+      "dark": "Brand background (#02080E or #0C0804). EN tagline only in generated images.",
+      "white": "Pure white (#FFFFFF) background. EN tagline only. No dark gradients."
+    },
+    "notes": "Trilingual taglines (EN/ZH/JP) are CSS text only — not baked into wordmark images."
+  },
+  "icons": {
+    "svg_rules": ["transparent background", "currentColor for flexible theming", "no hardcoded colors except explicit variants"],
+    "png_sizes": {
+      "favicon": "32×32 (via favicon.svg)",
+      "apple_touch": "180×180 transparent",
+      "pwa": ["192×192 transparent", "512×512 transparent"]
+    }
+  }
+}

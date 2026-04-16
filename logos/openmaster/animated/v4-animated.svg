@@ -1,0 +1,88 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <defs>
+    <style>
+      /* Center node — slow authority breathe */
+      .center {
+        animation: center-breathe 3s ease-in-out infinite;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      /* Hex outline — imperceptibly slow rotation */
+      .hex-ring {
+        animation: hex-rotate 24s linear infinite;
+        transform-origin: 50px 50px;
+      }
+
+      /* Nodes — each has its own period + irregular delay, never repeats same pattern */
+      .n0 { animation: node-scan 4.1s ease-in-out infinite 0s; }
+      .n1 { animation: node-scan 3.7s ease-in-out infinite 1.3s; }
+      .n2 { animation: node-scan 4.4s ease-in-out infinite 0.6s; }
+      .n3 { animation: node-scan 3.5s ease-in-out infinite 2.4s; }
+      .n4 { animation: node-scan 4.8s ease-in-out infinite 0.9s; }
+      .n5 { animation: node-scan 3.9s ease-in-out infinite 1.8s; }
+
+      /* Spokes — match their node's timing */
+      .s0 { animation: spoke-fire 4.1s ease-in-out infinite 0s; }
+      .s1 { animation: spoke-fire 3.7s ease-in-out infinite 1.3s; }
+      .s2 { animation: spoke-fire 4.4s ease-in-out infinite 0.6s; }
+      .s3 { animation: spoke-fire 3.5s ease-in-out infinite 2.4s; }
+      .s4 { animation: spoke-fire 4.8s ease-in-out infinite 0.9s; }
+      .s5 { animation: spoke-fire 3.9s ease-in-out infinite 1.8s; }
+
+      @keyframes center-breathe {
+        0%, 100% { opacity: 1;    transform: scale(1); }
+        45%       { opacity: 0.5;  transform: scale(0.88); }
+        55%       { opacity: 0.5;  transform: scale(0.88); }
+      }
+
+      @keyframes hex-rotate {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+      }
+
+      /* Node: briefly flares to full, then dims back down */
+      @keyframes node-scan {
+        0%   { opacity: 1; }
+        8%   { opacity: 0.35; }
+        100% { opacity: 0.35; }
+      }
+
+      /* Spoke: same rhythm, lower range */
+      @keyframes spoke-fire {
+        0%   { opacity: 0.55; }
+        8%   { opacity: 0.12; }
+        100% { opacity: 0.12; }
+      }
+    </style>
+  </defs>
+
+  <!-- Hex outline — rotates slowly -->
+  <polygon class="hex-ring"
+    points="50,22 74,36 74,64 50,78 26,64 26,36"
+    fill="none" stroke="currentColor" stroke-width="1.2"
+    stroke-dasharray="3 2" opacity="0.28"/>
+
+  <!-- Spokes — fire in clockwise sequence (top → upper-right → lower-right → bottom → lower-left → upper-left) -->
+  <g fill="none" stroke="currentColor" stroke-width="1.2">
+    <line class="s0" x1="50" y1="22" x2="50" y2="50"/>
+    <line class="s1" x1="74" y1="36" x2="50" y2="50"/>
+    <line class="s2" x1="74" y1="64" x2="50" y2="50"/>
+    <line class="s3" x1="50" y1="78" x2="50" y2="50"/>
+    <line class="s4" x1="26" y1="64" x2="50" y2="50"/>
+    <line class="s5" x1="26" y1="36" x2="50" y2="50"/>
+  </g>
+
+  <!-- Vertex nodes — clockwise scan -->
+  <g fill="currentColor">
+    <circle class="n0" cx="50" cy="22" r="3.5"/>
+    <circle class="n1" cx="74" cy="36" r="3.5"/>
+    <circle class="n2" cx="74" cy="64" r="3.5"/>
+    <circle class="n3" cx="50" cy="78" r="3.5"/>
+    <circle class="n4" cx="26" cy="64" r="3.5"/>
+    <circle class="n5" cx="26" cy="36" r="3.5"/>
+  </g>
+
+  <!-- Center — commands everything -->
+  <circle class="center" cx="50" cy="50" r="8" fill="currentColor"/>
+</svg>

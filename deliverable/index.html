@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenMaster Universe · Brand Identity Deliverable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --teal:   #00BCD4;
+            --amber:  #F5A623;
+            --bg:     #060606;
+            --surface:#0C0C0C;
+            --border: rgba(255,255,255,0.06);
+            --text:   #D8D8D8;
+            --dim:    rgba(255,255,255,0.28);
+            --mono:   'JetBrains Mono', monospace;
+            --hover-neutral: #ccc;
+        }
+
+        body.light {
+            --bg:     #F2F0ED;
+            --surface:#E8E5E1;
+            --border: rgba(0,0,0,0.08);
+            --text:   #1C1C1C;
+            --dim:    rgba(0,0,0,0.38);
+            --hover-neutral: #333;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1;
+            transition: background 0.35s, color 0.35s;
+        }
+
+        /* Mode toggle */
+        .mode-toggle {
+            position: fixed;
+            top: 20px; right: 24px;
+            z-index: 1000;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--dim);
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: border-color 0.2s, color 0.2s, background 0.35s;
+            backdrop-filter: blur(8px);
+        }
+        .mode-toggle:hover { border-color: var(--dim); color: var(--text); }
+
+        /* ── Typography helpers ── */
+        .mono  { font-family: var(--mono); }
+        .dim   { opacity: 0.35; }
+        .upper { text-transform: uppercase; letter-spacing: 0.18em; }
+
+        /* ── Cover ── */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 40px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cover-rule {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--border), transparent);
+            margin: 0 auto 48px;
+        }
+
+        .cover-eyebrow {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 32px;
+        }
+
+        .cover-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 200;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--teal) 0%, #7ED6E8 50%, var(--teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-sub {
+            font-size: clamp(18px, 3vw, 28px);
+            font-weight: 200;
+            letter-spacing: 0.08em;
+            opacity: 0.4;
+            margin-bottom: 48px;
+        }
+
+        .cover-chips {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 64px;
+        }
+
+        .chip {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 2px;
+            border: 1px solid;
+        }
+
+        .chip-teal  { border-color: rgba(0,188,212,0.3); color: var(--teal); opacity: 0.7; }
+        .chip-amber { border-color: rgba(245,166,35,0.3); color: var(--amber); opacity: 0.7; }
+        .chip-dim   { border-color: var(--border); color: var(--dim); }
+
+        .cover-meta {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.16em;
+            opacity: 0.2;
+            line-height: 2;
+        }
+
+        /* ── Section layout ── */
+        .section {
+            padding: 100px 60px;
+            border-bottom: 1px solid var(--border);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) { .section { padding: 64px 24px; } }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 64px;
+        }
+
+        .section-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1; height: 1px;
+            background: var(--border);
+        }
+
+        .section-title {
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 200;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .section-tagline {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            opacity: 0.3;
+            margin-bottom: 56px;
+        }
+
+        /* ── Animated icon display ── */
+        .icon-stage {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 72px;
+            flex-wrap: wrap;
+        }
+
+        .icon-live {
+            width: 160px;
+            height: 160px;
+            flex-shrink: 0;
+        }
+
+        .icon-live svg { width: 100%; height: 100%; display: block; }
+
+        .icon-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .icon-info-title {
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .token-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px 24px;
+            align-items: baseline;
+        }
+
+        .token-key {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            opacity: 0.28;
+        }
+
+        .token-val {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            opacity: 0.55;
+        }
+
+        /* ── Wordmark grid ── */
+        .wm-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .wm-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .wm-row.two-col {
+            grid-template-columns: 1.78fr 1fr;
+        }
+
+        @media (max-width: 768px) { .wm-row.two-col { grid-template-columns: 1fr; } }
+
+        .wm-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .wm-card:hover { border-color: rgba(255,255,255,0.12); }
+
+        .wm-card img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .wm-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .wm-card-label {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            opacity: 0.35;
+        }
+
+        /* ── Download button ── */
+        .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 5px 12px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--dim);
+            transition: border-color 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+
+        .dl-btn:hover {
+            border-color: rgba(255,255,255,0.25);
+            color: #ccc;
+        }
+
+        .dl-btn.teal:hover { border-color: rgba(0,188,212,0.4); color: var(--teal); }
+        .dl-btn.amber:hover { border-color: rgba(245,166,35,0.4); color: var(--amber); }
+
+        /* ── Downloads manifest ── */
+        .manifest {
+            padding: 80px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) { .manifest { padding: 64px 24px; } }
+
+        .manifest-title {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            opacity: 0.25;
+            margin-bottom: 40px;
+        }
+
+        .manifest-group {
+            margin-bottom: 40px;
+        }
+
+        .manifest-group-label {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0.2;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .manifest-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            gap: 16px;
+        }
+
+        .manifest-item:last-child { border-bottom: none; }
+
+        .manifest-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .manifest-item-name {
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            margin-bottom: 3px;
+        }
+
+        .manifest-item-meta {
+            font-family: var(--mono);
+            font-size: 8px;
+            letter-spacing: 0.1em;
+            opacity: 0.25;
+        }
+
+        /* ── Brand tokens section ── */
+        .tokens-section {
+            padding: 80px 60px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) { .tokens-section { padding: 64px 24px; } }
+
+        .tokens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2px;
+        }
+
+        .token-block {
+            background: var(--surface);
+            padding: 32px;
+        }
+
+        .token-block-label {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.22;
+            margin-bottom: 20px;
+        }
+
+        .color-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-bottom: 12px;
+        }
+
+        .color-hex {
+            font-family: var(--mono);
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+        }
+
+        .color-name {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            opacity: 0.3;
+        }
+
+        .tagline-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tagline-line {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            line-height: 1.5;
+        }
+
+        .tagline-lang {
+            font-size: 8px;
+            letter-spacing: 0.16em;
+            opacity: 0.22;
+            text-transform: uppercase;
+            margin-right: 10px;
+        }
+
+        /* ── Icon grid ── */
+        .icons-section {
+            padding: 80px 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+        @media (max-width: 768px) { .icons-section { padding: 56px 24px 24px; } }
+
+        .icon-group-hd {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.2;
+            margin: 32px 0 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .icon-group-hd:first-of-type { margin-top: 0; }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+        .icon-grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .icon-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+        @media (max-width: 600px) {
+            .icon-grid-2, .icon-grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .icon-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: border-color 0.25s, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        .icon-card:hover {
+            border-color: rgba(255,255,255,0.14);
+            transform: translateY(-2px);
+        }
+
+        .icon-preview {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22%;
+        }
+        .icon-preview svg { width: 100%; height: 100%; display: block; }
+        .icon-preview img { width: 100%; height: 100%; object-fit: contain; }
+
+        .icon-foot {
+            padding: 10px 12px 12px;
+            border-top: 1px solid var(--border);
+        }
+        .icon-foot-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+        .icon-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+        }
+        .icon-fmt {
+            font-family: var(--mono);
+            font-size: 8px;
+            letter-spacing: 0.08em;
+            opacity: 0.25;
+            text-transform: uppercase;
+        }
+        .icon-dl {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-family: var(--mono);
+            font-size: 8px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 5px 8px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--dim);
+            transition: border-color 0.2s, color 0.2s;
+            cursor: pointer;
+            width: 100%;
+        }
+        .icon-dl:hover { border-color: rgba(128,128,128,0.35); color: var(--hover-neutral); }
+        .icon-dl.teal:hover  { border-color: rgba(0,188,212,0.45);  color: var(--teal); }
+        .icon-dl.amber:hover { border-color: rgba(245,166,35,0.45); color: var(--amber); }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 48px 60px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.15;
+            line-height: 2;
+        }
+
+        /* ── SVG animations (inline) ── */
+        .focal   { animation: focal-breathe 2.8s ease-in-out infinite; }
+        .arc-1   { animation: broadcast 2.8s ease-in-out infinite 0s; }
+        .arc-2   { animation: broadcast 2.8s ease-in-out infinite 0.32s; }
+        .arc-3   { animation: broadcast 2.8s ease-in-out infinite 0.64s; }
+        .tips    { animation: broadcast 2.8s ease-in-out infinite 0.82s; }
+
+        @keyframes focal-breathe {
+            0%, 100% { opacity: 1; }
+            45%, 55% { opacity: 0.55; }
+        }
+        @keyframes broadcast {
+            0%   { opacity: 0.12; }
+            12%  { opacity: 1; }
+            55%  { opacity: 0.9; }
+            100% { opacity: 0.12; }
+        }
+
+        .center   { animation: center-breathe 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .hex-ring { animation: hex-rotate 24s linear infinite; transform-origin: 50px 50px; }
+        .n0 { animation: node-scan 4.1s ease-in-out infinite 0s; }
+        .n1 { animation: node-scan 3.7s ease-in-out infinite 1.3s; }
+        .n2 { animation: node-scan 4.4s ease-in-out infinite 0.6s; }
+        .n3 { animation: node-scan 3.5s ease-in-out infinite 2.4s; }
+        .n4 { animation: node-scan 4.8s ease-in-out infinite 0.9s; }
+        .n5 { animation: node-scan 3.9s ease-in-out infinite 1.8s; }
+        .s0 { animation: spoke-fire 4.1s ease-in-out infinite 0s; }
+        .s1 { animation: spoke-fire 3.7s ease-in-out infinite 1.3s; }
+        .s2 { animation: spoke-fire 4.4s ease-in-out infinite 0.6s; }
+        .s3 { animation: spoke-fire 3.5s ease-in-out infinite 2.4s; }
+        .s4 { animation: spoke-fire 4.8s ease-in-out infinite 0.9s; }
+        .s5 { animation: spoke-fire 3.9s ease-in-out infinite 1.8s; }
+
+        @keyframes center-breathe {
+            0%, 100% { opacity: 1;   transform: scale(1); }
+            45%, 55% { opacity: 0.5; transform: scale(0.88); }
+        }
+        @keyframes hex-rotate {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        @keyframes node-scan {
+            0%   { opacity: 1; }
+            8%   { opacity: 0.35; }
+            100% { opacity: 0.35; }
+        }
+        @keyframes spoke-fire {
+            0%   { opacity: 0.55; }
+            8%   { opacity: 0.1; }
+            100% { opacity: 0.1; }
+        }
+
+        /* Light mode — all preview backgrounds adapt to surface,
+           except .prev-dark (animated glows + white icon variants) */
+        body.light .icon-preview:not(.prev-dark) {
+            background: var(--surface) !important;
+        }
+    </style>
+</head>
+<body>
+
+<button class="mode-toggle" id="modeBtn" onclick="toggleMode()">Light</button>
+
+<!-- ══ COVER ══════════════════════════════════════════════════════════════ -->
+<div class="cover">
+    <div class="cover-rule"></div>
+    <div class="cover-eyebrow">Brand Identity Deliverable · 2026</div>
+    <h1 class="cover-title">OpenMaster</h1>
+    <p class="cover-sub">Universe Brand System</p>
+    <div class="cover-chips">
+        <span class="chip chip-teal">OpenMaster · Universe</span>
+        <span class="chip chip-amber">ClawMaster · Flagship</span>
+        <span class="chip chip-dim">Inter Light</span>
+        <span class="chip chip-dim">Futura Light</span>
+        <span class="chip chip-dim">SVG Animated</span>
+    </div>
+    <p class="cover-meta">
+        Two marks · Two palettes · Three layouts each<br>
+        Animated SVG icons · Downloadable assets
+    </p>
+</div>
+
+
+<!-- ══ OPENMASTER ═════════════════════════════════════════════════════════ -->
+<div style="border-bottom: 1px solid var(--border);">
+<div class="section">
+
+    <div class="section-header">
+        <div class="section-dot" style="background:var(--teal)"></div>
+        <span class="section-label">Universe · Platform</span>
+    </div>
+
+    <h2 class="section-title" style="color:var(--teal)">OpenMaster</h2>
+    <p class="section-tagline">
+        <span style="opacity:.55">One Platform. Every Master.</span>
+        &nbsp;&nbsp;·&nbsp;&nbsp;一生态，众大师
+        &nbsp;&nbsp;·&nbsp;&nbsp;共に、極みへ
+    </p>
+
+    <!-- Animated icon + tokens -->
+    <div class="icon-stage">
+        <div class="icon-live" style="color:var(--teal)">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="hex-ring" points="50,22 74,36 74,64 50,78 26,64 26,36"
+                    fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.28"/>
+                <g fill="none" stroke="currentColor" stroke-width="1.2">
+                    <line class="s0" x1="50" y1="22" x2="50" y2="50"/>
+                    <line class="s1" x1="74" y1="36" x2="50" y2="50"/>
+                    <line class="s2" x1="74" y1="64" x2="50" y2="50"/>
+                    <line class="s3" x1="50" y1="78" x2="50" y2="50"/>
+                    <line class="s4" x1="26" y1="64" x2="50" y2="50"/>
+                    <line class="s5" x1="26" y1="36" x2="50" y2="50"/>
+                </g>
+                <g fill="currentColor">
+                    <circle class="n0" cx="50" cy="22" r="3.5"/>
+                    <circle class="n1" cx="74" cy="36" r="3.5"/>
+                    <circle class="n2" cx="74" cy="64" r="3.5"/>
+                    <circle class="n3" cx="50" cy="78" r="3.5"/>
+                    <circle class="n4" cx="26" cy="64" r="3.5"/>
+                    <circle class="n5" cx="26" cy="36" r="3.5"/>
+                </g>
+                <circle class="center" cx="50" cy="50" r="8" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <div class="icon-info">
+            <div class="icon-info-title">V4 Hex Warrior · Command Scan</div>
+            <div class="token-grid">
+                <span class="token-key">Mark</span>
+                <span class="token-val">V4 Hex Warrior</span>
+                <span class="token-key">Color</span>
+                <span class="token-val" style="color:var(--teal)">#00BCD4 Ocean Teal</span>
+                <span class="token-key">Wordmark</span>
+                <span class="token-val">Inter Light · 0.14em tracking</span>
+                <span class="token-key">Background</span>
+                <span class="token-val">#02080E Deep Navy</span>
+                <span class="token-key">Animation</span>
+                <span class="token-val">Node scan CW · 3s · hex 24s</span>
+            </div>
+            <div style="margin-top:20px">
+                <a class="dl-btn teal" href="../logos/openmaster/animated/v4-animated.svg" download="openmaster-icon-animated.svg">↓ Animated SVG</a>
+                &nbsp;
+                <a class="dl-btn" href="../logos/openmaster/static/teal.svg" download="openmaster-icon-static.svg">↓ Static SVG</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wordmarks -->
+    <div class="wm-grid">
+        <!-- Horizontal full-width -->
+        <div class="wm-row">
+            <div class="wm-card">
+                <img src="../logos/openmaster/wordmarks/dark/horizontal.png" alt="OpenMaster Horizontal"/>
+                <div class="wm-card-footer">
+                    <span class="wm-card-label">Horizontal · 16:9 · Inter Light</span>
+                    <a class="dl-btn teal" href="../logos/openmaster/wordmarks/dark/horizontal.png" download="openmaster-wordmark-horizontal.png">↓ PNG</a>
+                </div>
+            </div>
+        </div>
+        <!-- Stacked + Compact -->
+        <div class="wm-row two-col">
+            <div class="wm-card">
+                <img src="../logos/openmaster/wordmarks/dark/stacked.png" alt="OpenMaster Stacked"/>
+                <div class="wm-card-footer">
+                    <span class="wm-card-label">Stacked Trilingual · 1:1</span>
+                    <a class="dl-btn teal" href="../logos/openmaster/wordmarks/dark/stacked.png" download="openmaster-wordmark-stacked.png">↓ PNG</a>
+                </div>
+            </div>
+            <div class="wm-card">
+                <img src="../logos/openmaster/wordmarks/dark/compact.png" alt="OpenMaster Compact"/>
+                <div class="wm-card-footer">
+                    <span class="wm-card-label">Compact · Nav</span>
+                    <a class="dl-btn teal" href="../logos/openmaster/wordmarks/dark/compact.png" download="openmaster-wordmark-compact.png">↓ PNG</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- ══ CLAWMASTER ════════════════════════════════════════════════════════ -->
+<div style="border-bottom: 1px solid var(--border);">
+<div class="section">
+
+    <div class="section-header">
+        <div class="section-dot" style="background:var(--amber)"></div>
+        <span class="section-label">Flagship · Product</span>
+    </div>
+
+    <h2 class="section-title" style="color:var(--amber)">ClawMaster</h2>
+    <p class="section-tagline">
+        <span style="opacity:.55">Master the Claw, Command the Core.</span>
+        &nbsp;&nbsp;·&nbsp;&nbsp;执掌利爪，驯服混乱
+        &nbsp;&nbsp;·&nbsp;&nbsp;爪に道あり、要を制せ
+    </p>
+
+    <!-- Animated icon + tokens -->
+    <div class="icon-stage">
+        <div class="icon-live" style="color:var(--amber)">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle class="focal" cx="68" cy="50" r="5" fill="currentColor"/>
+                <g fill="none" stroke="currentColor" stroke-linecap="round">
+                    <path class="arc-1" d="M 68 40 A 10 10 0 0 0 68 60" stroke-width="3.5"/>
+                    <path class="arc-2" d="M 68 31 A 19 19 0 0 0 68 69" stroke-width="3"/>
+                    <path class="arc-3" d="M 68 22 A 28 28 0 0 0 68 78" stroke-width="2.5"/>
+                </g>
+                <g class="tips" fill="currentColor">
+                    <circle cx="68" cy="22" r="2.5"/>
+                    <circle cx="68" cy="78" r="2.5"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="icon-info">
+            <div class="icon-info-title">V3 Command Signal · Broadcast</div>
+            <div class="token-grid">
+                <span class="token-key">Mark</span>
+                <span class="token-val">V3 Command Signal</span>
+                <span class="token-key">Color</span>
+                <span class="token-val" style="color:var(--amber)">#F5A623 Ember Amber</span>
+                <span class="token-key">Wordmark</span>
+                <span class="token-val">Futura Light · 0.18em tracking</span>
+                <span class="token-key">Background</span>
+                <span class="token-val">#0C0804 Deep Warm Dark</span>
+                <span class="token-key">Animation</span>
+                <span class="token-val">Broadcast wave · 2.8s cycle</span>
+            </div>
+            <div style="margin-top:20px">
+                <a class="dl-btn amber" href="../logos/clawmaster/animated/v3-animated.svg" download="clawmaster-icon-animated.svg">↓ Animated SVG</a>
+                &nbsp;
+                <a class="dl-btn" href="../logos/clawmaster/static/amber.svg" download="clawmaster-icon-static.svg">↓ Static SVG</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wordmarks -->
+    <div class="wm-grid">
+        <div class="wm-row">
+            <div class="wm-card">
+                <img src="../logos/clawmaster/wordmarks/dark/horizontal.png" alt="ClawMaster Horizontal"/>
+                <div class="wm-card-footer">
+                    <span class="wm-card-label">Horizontal · 16:9 · Futura Light</span>
+                    <a class="dl-btn amber" href="../logos/clawmaster/wordmarks/dark/horizontal.png" download="clawmaster-wordmark-horizontal.png">↓ PNG</a>
+                </div>
+            </div>
+        </div>
+        <div class="wm-row two-col">
+            <div class="wm-card">
+                <img src="../logos/clawmaster/wordmarks/dark/stacked.png" alt="ClawMaster Stacked"/>
+                <div class="wm-card-footer">
+                    <span class="wm-card-label">Stacked · 1:1</span>
+                    <a class="dl-btn amber" href="../logos/clawmaster/wordmarks/dark/stacked.png" download="clawmaster-wordmark-stacked.png">↓ PNG</a>
+                </div>
+            </div>
+            <div class="wm-card">
+                <img src="../logos/clawmaster/wordmarks/dark/compact.png" alt="ClawMaster Compact"/>
+                <div class="wm-card-footer">
+                    <span class="wm-card-label">Compact · Nav</span>
+                    <a class="dl-btn amber" href="../logos/clawmaster/wordmarks/dark/compact.png" download="clawmaster-wordmark-compact.png">↓ PNG</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- ══ BRAND TOKENS ═══════════════════════════════════════════════════════ -->
+<div class="tokens-section">
+    <div class="manifest-title">Brand Tokens</div>
+    <div class="tokens-grid">
+
+        <!-- OpenMaster color -->
+        <div class="token-block">
+            <div class="token-block-label">OpenMaster · Color</div>
+            <div class="color-swatch" style="background:var(--teal)"></div>
+            <div class="color-hex" style="color:var(--teal)">#00BCD4</div>
+            <div class="color-name">Ocean Teal · Primary</div>
+            <div style="margin-top:10px">
+                <div class="color-hex" style="color:#4DD0E1; font-size:11px">#4DD0E1</div>
+                <div class="color-name">Aqua · Secondary</div>
+            </div>
+            <div style="margin-top:10px">
+                <div class="color-hex" style="color:#02080E; font-size:11px">#02080E</div>
+                <div class="color-name">Deep Navy · Background</div>
+            </div>
+        </div>
+
+        <!-- ClawMaster color -->
+        <div class="token-block">
+            <div class="token-block-label">ClawMaster · Color</div>
+            <div class="color-swatch" style="background:var(--amber)"></div>
+            <div class="color-hex" style="color:var(--amber)">#F5A623</div>
+            <div class="color-name">Ember Amber · Primary</div>
+            <div style="margin-top:10px">
+                <div class="color-hex" style="color:#FFD54F; font-size:11px">#FFD54F</div>
+                <div class="color-name">Gold · Secondary</div>
+            </div>
+            <div style="margin-top:10px">
+                <div class="color-hex" style="color:#0C0804; font-size:11px">#0C0804</div>
+                <div class="color-name">Deep Warm Dark · Background</div>
+            </div>
+        </div>
+
+        <!-- Typography -->
+        <div class="token-block">
+            <div class="token-block-label">Typography</div>
+            <div style="font-size:20px; font-weight:200; letter-spacing:0.06em; color:var(--teal); margin-bottom:8px">Inter Light</div>
+            <div class="color-name" style="margin-bottom:20px">OpenMaster universe wordmark</div>
+            <div style="font-size:20px; font-weight:200; letter-spacing:0.1em; color:var(--amber); margin-bottom:8px; font-family:'Georgia',serif; font-style:normal">Futura Light</div>
+            <div class="color-name">ClawMaster flagship wordmark</div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="token-block">
+            <div class="token-block-label">Brand Architecture</div>
+            <div style="font-family:var(--mono); font-size:11px; line-height:2.2; opacity:0.55">
+                <span style="color:var(--teal)">OpenMaster</span> &nbsp;·&nbsp; Universe<br>
+                &nbsp;&nbsp;└─ <span style="color:var(--amber)">ClawMaster</span> &nbsp;·&nbsp; Flagship<br>
+                &nbsp;&nbsp;└─ <span style="opacity:0.3">XxxMaster</span> &nbsp;·&nbsp; <span style="opacity:0.2">Future</span><br>
+                &nbsp;&nbsp;└─ <span style="opacity:0.2">YyyMaster</span> &nbsp;·&nbsp; <span style="opacity:0.15">Future</span>
+            </div>
+        </div>
+
+        <!-- OpenMaster taglines -->
+        <div class="token-block">
+            <div class="token-block-label">OpenMaster · Taglines</div>
+            <div class="tagline-stack">
+                <div class="tagline-line" style="color:var(--teal)">
+                    <span class="tagline-lang">EN</span>One Platform. Every Master.
+                </div>
+                <div class="tagline-line" style="color:var(--teal); opacity:0.7">
+                    <span class="tagline-lang">ZH</span>一生态，众大师
+                </div>
+                <div class="tagline-line" style="color:var(--teal); opacity:0.5">
+                    <span class="tagline-lang">JP</span>共に、極みへ
+                </div>
+            </div>
+        </div>
+
+        <!-- ClawMaster taglines -->
+        <div class="token-block">
+            <div class="token-block-label">ClawMaster · Taglines</div>
+            <div class="tagline-stack">
+                <div class="tagline-line" style="color:var(--amber)">
+                    <span class="tagline-lang">EN</span>Master the Claw, Command the Core.
+                </div>
+                <div class="tagline-line" style="color:var(--amber); opacity:0.7">
+                    <span class="tagline-lang">ZH</span>执掌利爪，驯服混乱
+                </div>
+                <div class="tagline-line" style="color:var(--amber); opacity:0.5">
+                    <span class="tagline-lang">JP</span>爪に道あり、要を制せ
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ══ ICONS GRID ═════════════════════════════════════════════════════════ -->
+<div class="icons-section">
+    <div class="manifest-title">Icons · 13 Files</div>
+
+    <!-- Animated -->
+    <div class="icon-group-hd">Animated · CSS Native · currentColor</div>
+    <div class="icon-grid icon-grid-2">
+
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#0C0804;color:#F5A623">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="focal" cx="68" cy="50" r="5" fill="currentColor"/>
+                    <g fill="none" stroke="currentColor" stroke-linecap="round">
+                        <path class="arc-1" d="M 68 40 A 10 10 0 0 0 68 60" stroke-width="3.5"/>
+                        <path class="arc-2" d="M 68 31 A 19 19 0 0 0 68 69" stroke-width="3"/>
+                        <path class="arc-3" d="M 68 22 A 28 28 0 0 0 68 78" stroke-width="2.5"/>
+                    </g>
+                    <g class="tips" fill="currentColor"><circle cx="68" cy="22" r="2.5"/><circle cx="68" cy="78" r="2.5"/></g>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">ClawMaster</span><span class="icon-fmt">SVG · Animated</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/animated/v3-animated.svg" download="clawmaster-icon-animated.svg">↓ Download</a>
+            </div>
+        </div>
+
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#02080E;color:#00BCD4">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="hex-ring" points="50,22 74,36 74,64 50,78 26,64 26,36" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.28"/>
+                    <g fill="none" stroke="currentColor" stroke-width="1.2">
+                        <line class="s0" x1="50" y1="22" x2="50" y2="50"/><line class="s1" x1="74" y1="36" x2="50" y2="50"/>
+                        <line class="s2" x1="74" y1="64" x2="50" y2="50"/><line class="s3" x1="50" y1="78" x2="50" y2="50"/>
+                        <line class="s4" x1="26" y1="64" x2="50" y2="50"/><line class="s5" x1="26" y1="36" x2="50" y2="50"/>
+                    </g>
+                    <g fill="currentColor">
+                        <circle class="n0" cx="50" cy="22" r="3.5"/><circle class="n1" cx="74" cy="36" r="3.5"/>
+                        <circle class="n2" cx="74" cy="64" r="3.5"/><circle class="n3" cx="50" cy="78" r="3.5"/>
+                        <circle class="n4" cx="26" cy="64" r="3.5"/><circle class="n5" cx="26" cy="36" r="3.5"/>
+                    </g>
+                    <circle class="center" cx="50" cy="50" r="8" fill="currentColor"/>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">OpenMaster</span><span class="icon-fmt">SVG · Animated</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/animated/v4-animated.svg" download="openmaster-icon-animated.svg">↓ Download</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Static color variants -->
+    <div class="icon-group-hd">Static · Color Variants · SVG</div>
+    <div class="icon-grid">
+
+        <!-- ClawMaster V3 — Amber -->
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#0C0804">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="68" cy="50" r="5" fill="#F5A623"/>
+                    <g fill="none" stroke="#F5A623" stroke-linecap="round">
+                        <path d="M 68 40 A 10 10 0 0 0 68 60" stroke-width="3.5"/>
+                        <path d="M 68 31 A 19 19 0 0 0 68 69" stroke-width="3"/>
+                        <path d="M 68 22 A 28 28 0 0 0 68 78" stroke-width="2.5"/>
+                    </g>
+                    <g fill="#F5A623"><circle cx="68" cy="22" r="2.5"/><circle cx="68" cy="78" r="2.5"/></g>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">CM Amber</span><span class="icon-fmt">SVG</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/static/amber.svg" download="clawmaster-icon-amber.svg">↓ Download</a>
+            </div>
+        </div>
+
+        <!-- ClawMaster V3 — White -->
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#111">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="68" cy="50" r="5" fill="#FFF"/>
+                    <g fill="none" stroke="#FFF" stroke-linecap="round">
+                        <path d="M 68 40 A 10 10 0 0 0 68 60" stroke-width="3.5"/>
+                        <path d="M 68 31 A 19 19 0 0 0 68 69" stroke-width="3"/>
+                        <path d="M 68 22 A 28 28 0 0 0 68 78" stroke-width="2.5"/>
+                    </g>
+                    <g fill="#FFF"><circle cx="68" cy="22" r="2.5"/><circle cx="68" cy="78" r="2.5"/></g>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">CM White</span><span class="icon-fmt">SVG</span></div>
+                <a class="icon-dl" href="../logos/clawmaster/static/white.svg" download="clawmaster-icon-white.svg">↓ Download</a>
+            </div>
+        </div>
+
+        <!-- ClawMaster V3 — Black -->
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#F0EDE8">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="68" cy="50" r="5" fill="#1A1A1A"/>
+                    <g fill="none" stroke="#1A1A1A" stroke-linecap="round">
+                        <path d="M 68 40 A 10 10 0 0 0 68 60" stroke-width="3.5"/>
+                        <path d="M 68 31 A 19 19 0 0 0 68 69" stroke-width="3"/>
+                        <path d="M 68 22 A 28 28 0 0 0 68 78" stroke-width="2.5"/>
+                    </g>
+                    <g fill="#1A1A1A"><circle cx="68" cy="22" r="2.5"/><circle cx="68" cy="78" r="2.5"/></g>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">CM Black</span><span class="icon-fmt">SVG</span></div>
+                <a class="icon-dl" href="../logos/clawmaster/static/black.svg" download="clawmaster-icon-black.svg">↓ Download</a>
+            </div>
+        </div>
+
+        <!-- OpenMaster V4 — Teal -->
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#02080E">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#00BCD4" stroke-width="1.5" opacity="0.3">
+                        <polygon points="50,22 74,36 74,64 50,78 26,64 26,36" stroke-dasharray="3 2"/>
+                        <line x1="50" y1="22" x2="50" y2="50"/><line x1="74" y1="36" x2="50" y2="50"/>
+                        <line x1="74" y1="64" x2="50" y2="50"/><line x1="50" y1="78" x2="50" y2="50"/>
+                        <line x1="26" y1="64" x2="50" y2="50"/><line x1="26" y1="36" x2="50" y2="50"/>
+                    </g>
+                    <g fill="#00BCD4">
+                        <circle cx="50" cy="22" r="3.5"/><circle cx="74" cy="36" r="3.5"/>
+                        <circle cx="74" cy="64" r="3.5"/><circle cx="50" cy="78" r="3.5"/>
+                        <circle cx="26" cy="64" r="3.5"/><circle cx="26" cy="36" r="3.5"/>
+                        <circle cx="50" cy="50" r="8"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">OM Teal</span><span class="icon-fmt">SVG</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/static/teal.svg" download="openmaster-icon-teal.svg">↓ Download</a>
+            </div>
+        </div>
+
+        <!-- OpenMaster V4 — White -->
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#111">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#FFF" stroke-width="1.5" opacity="0.3">
+                        <polygon points="50,22 74,36 74,64 50,78 26,64 26,36" stroke-dasharray="3 2"/>
+                        <line x1="50" y1="22" x2="50" y2="50"/><line x1="74" y1="36" x2="50" y2="50"/>
+                        <line x1="74" y1="64" x2="50" y2="50"/><line x1="50" y1="78" x2="50" y2="50"/>
+                        <line x1="26" y1="64" x2="50" y2="50"/><line x1="26" y1="36" x2="50" y2="50"/>
+                    </g>
+                    <g fill="#FFF">
+                        <circle cx="50" cy="22" r="3.5"/><circle cx="74" cy="36" r="3.5"/>
+                        <circle cx="74" cy="64" r="3.5"/><circle cx="50" cy="78" r="3.5"/>
+                        <circle cx="26" cy="64" r="3.5"/><circle cx="26" cy="36" r="3.5"/>
+                        <circle cx="50" cy="50" r="8"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">OM White</span><span class="icon-fmt">SVG</span></div>
+                <a class="icon-dl" href="../logos/openmaster/static/white.svg" download="openmaster-icon-white.svg">↓ Download</a>
+            </div>
+        </div>
+
+        <!-- OpenMaster V4 — Black -->
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#F0EDE8">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="#1A1A1A" stroke-width="1.5" opacity="0.3">
+                        <polygon points="50,22 74,36 74,64 50,78 26,64 26,36" stroke-dasharray="3 2"/>
+                        <line x1="50" y1="22" x2="50" y2="50"/><line x1="74" y1="36" x2="50" y2="50"/>
+                        <line x1="74" y1="64" x2="50" y2="50"/><line x1="50" y1="78" x2="50" y2="50"/>
+                        <line x1="26" y1="64" x2="50" y2="50"/><line x1="26" y1="36" x2="50" y2="50"/>
+                    </g>
+                    <g fill="#1A1A1A">
+                        <circle cx="50" cy="22" r="3.5"/><circle cx="74" cy="36" r="3.5"/>
+                        <circle cx="74" cy="64" r="3.5"/><circle cx="50" cy="78" r="3.5"/>
+                        <circle cx="26" cy="64" r="3.5"/><circle cx="26" cy="36" r="3.5"/>
+                        <circle cx="50" cy="50" r="8"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">OM Black</span><span class="icon-fmt">SVG</span></div>
+                <a class="icon-dl" href="../logos/openmaster/static/black.svg" download="openmaster-icon-black.svg">↓ Download</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Platform PNG -->
+    <div class="icon-group-hd">Platform PNG · Web + iOS + PWA</div>
+    <div class="icon-grid icon-grid-3">
+
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#0C0804">
+                <img src="../icons/icon-512.png" alt="512px icon"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">512 × 512</span><span class="icon-fmt">PNG</span></div>
+                <a class="icon-dl amber" href="../icons/icon-512.png" download="clawmaster-icon-512.png">↓ Download</a>
+            </div>
+        </div>
+
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#0C0804">
+                <img src="../icons/icon-192.png" alt="192px icon"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">192 × 192</span><span class="icon-fmt">PNG · PWA</span></div>
+                <a class="icon-dl amber" href="../icons/icon-192.png" download="clawmaster-icon-192.png">↓ Download</a>
+            </div>
+        </div>
+
+        <div class="icon-card">
+            <div class="icon-preview" style="background:#0C0804">
+                <img src="../icons/apple-touch-icon.png" alt="180px icon"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">180 × 180</span><span class="icon-fmt">PNG · iOS</span></div>
+                <a class="icon-dl amber" href="../icons/apple-touch-icon.png" download="clawmaster-apple-touch-icon.png">↓ Download</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ══ WORDMARKS ═════════════════════════════════════════════════════════ -->
+<div class="icons-section">
+    <div class="manifest-title">Wordmarks · 6 Files</div>
+
+    <!-- ── OpenMaster wordmarks ── -->
+    <div class="icon-group-hd">OpenMaster · Inter Light · Dark Background</div>
+    <div class="icon-grid icon-grid-3">
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#02080E;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/openmaster/wordmarks/dark/horizontal.png" alt="OpenMaster Horizontal Dark" style="width:100%;height:auto;display:block"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Horizontal</span><span class="icon-fmt">16:9</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/wordmarks/dark/horizontal.png" download="openmaster-wordmark-dark-horizontal.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#02080E;padding:12px;aspect-ratio:1">
+                <img src="../logos/openmaster/wordmarks/dark/stacked.png" alt="OpenMaster Stacked Dark" style="width:100%;height:100%;object-fit:contain;display:block"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Stacked</span><span class="icon-fmt">1:1</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/wordmarks/dark/stacked.png" download="openmaster-wordmark-dark-stacked.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#02080E;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/openmaster/wordmarks/dark/compact.png" alt="OpenMaster Compact Dark" style="width:100%;height:auto;display:block"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Compact</span><span class="icon-fmt">16:9 · Nav</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/wordmarks/dark/compact.png" download="openmaster-wordmark-dark-compact.png">↓ Download</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="icon-group-hd">OpenMaster · Inter Light · White Background · EN Only</div>
+    <div class="icon-grid icon-grid-3">
+        <div class="icon-card">
+            <div class="icon-preview" style="background:transparent;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/openmaster/wordmarks/white/horizontal.png" alt="OpenMaster Horizontal White" style="width:100%;height:auto;display:block;border-radius:2px"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Horizontal</span><span class="icon-fmt">16:9 · EN</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/wordmarks/white/horizontal.png" download="openmaster-wordmark-white-horizontal.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview" style="background:transparent;padding:12px;aspect-ratio:1">
+                <img src="../logos/openmaster/wordmarks/white/stacked.png" alt="OpenMaster Stacked White" style="width:100%;height:100%;object-fit:contain;display:block;border-radius:2px"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Stacked</span><span class="icon-fmt">1:1 · EN</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/wordmarks/white/stacked.png" download="openmaster-wordmark-white-stacked.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview" style="background:transparent;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/openmaster/wordmarks/white/compact.png" alt="OpenMaster Compact White" style="width:100%;height:auto;display:block;border-radius:2px"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Compact</span><span class="icon-fmt">16:9 · EN</span></div>
+                <a class="icon-dl teal" href="../logos/openmaster/wordmarks/white/compact.png" download="openmaster-wordmark-white-compact.png">↓ Download</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── ClawMaster wordmarks ── -->
+    <div class="icon-group-hd">ClawMaster · Futura Light · Dark Background</div>
+    <div class="icon-grid icon-grid-3">
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#0C0804;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/clawmaster/wordmarks/dark/horizontal.png" alt="ClawMaster Horizontal Dark" style="width:100%;height:auto;display:block"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Horizontal</span><span class="icon-fmt">16:9</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/wordmarks/dark/horizontal.png" download="clawmaster-wordmark-dark-horizontal.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#0C0804;padding:12px;aspect-ratio:1">
+                <img src="../logos/clawmaster/wordmarks/dark/stacked.png" alt="ClawMaster Stacked Dark" style="width:100%;height:100%;object-fit:contain;display:block"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Stacked</span><span class="icon-fmt">1:1</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/wordmarks/dark/stacked.png" download="clawmaster-wordmark-dark-stacked.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview prev-dark" style="background:#0C0804;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/clawmaster/wordmarks/dark/compact.png" alt="ClawMaster Compact Dark" style="width:100%;height:auto;display:block"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Compact</span><span class="icon-fmt">16:9 · Nav</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/wordmarks/dark/compact.png" download="clawmaster-wordmark-dark-compact.png">↓ Download</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="icon-group-hd">ClawMaster · Futura Light · White Background · EN Only</div>
+    <div class="icon-grid icon-grid-3">
+        <div class="icon-card">
+            <div class="icon-preview" style="background:transparent;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/clawmaster/wordmarks/white/horizontal.png" alt="ClawMaster Horizontal White" style="width:100%;height:auto;display:block;border-radius:2px"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Horizontal</span><span class="icon-fmt">16:9 · EN</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/wordmarks/white/horizontal.png" download="clawmaster-wordmark-white-horizontal.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview" style="background:transparent;padding:12px;aspect-ratio:1">
+                <img src="../logos/clawmaster/wordmarks/white/stacked.png" alt="ClawMaster Stacked White" style="width:100%;height:100%;object-fit:contain;display:block;border-radius:2px"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Stacked</span><span class="icon-fmt">1:1 · EN</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/wordmarks/white/stacked.png" download="clawmaster-wordmark-white-stacked.png">↓ Download</a>
+            </div>
+        </div>
+        <div class="icon-card">
+            <div class="icon-preview" style="background:transparent;padding:12px;aspect-ratio:auto;min-height:100px">
+                <img src="../logos/clawmaster/wordmarks/white/compact.png" alt="ClawMaster Compact White" style="width:100%;height:auto;display:block;border-radius:2px"/>
+            </div>
+            <div class="icon-foot">
+                <div class="icon-foot-top"><span class="icon-label">Compact</span><span class="icon-fmt">16:9 · EN</span></div>
+                <a class="icon-dl amber" href="../logos/clawmaster/wordmarks/white/compact.png" download="clawmaster-wordmark-white-compact.png">↓ Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>
+        OpenMaster Universe · Brand Identity v1.0 · 2026<br>
+        V4 Hex Warrior · Ocean Teal · Inter Light &nbsp;/&nbsp; V3 Command Signal · Ember Amber · Futura Light<br>
+        Animated SVG icons · CSS native · currentColor
+    </p>
+</div>
+
+<script>
+    const btn = document.getElementById('modeBtn');
+    let light = false;
+
+    // Respect system preference on load
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        light = true;
+        document.body.classList.add('light');
+        btn.textContent = 'Dark';
+    }
+
+    function toggleMode() {
+        light = !light;
+        document.body.classList.toggle('light', light);
+        btn.textContent = light ? 'Dark' : 'Light';
+        localStorage.setItem('om-theme', light ? 'light' : 'dark');
+    }
+
+    // Restore saved preference
+    const saved = localStorage.getItem('om-theme');
+    if (saved) {
+        light = saved === 'light';
+        document.body.classList.toggle('light', light);
+        btn.textContent = light ? 'Dark' : 'Light';
+    }
+</script>
+
+</body>
+</html>
